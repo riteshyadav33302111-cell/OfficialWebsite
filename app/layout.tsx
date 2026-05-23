@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Space_Grotesk, JetBrains_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import LenisProvider from "@/components/layout/LenisProvider";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
@@ -80,6 +81,7 @@ export default function RootLayout({
           <div className="min-h-screen">{children}</div>
           <Footer />
         </LenisProvider>
+        <Analytics />
       </body>
     </html>
   );
