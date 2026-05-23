@@ -4,81 +4,211 @@ import { useRef } from 'react';
 import { useGSAP } from '@gsap/react';
 import { gsap } from '@/hooks/useGSAPAnimation';
 import type { Developer } from '@/lib/types';
+import Image from 'next/image';
 
-const socialIcons: Record<string, string> = {
-  linkedin: 'M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z',
-  github: 'M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.49.5.09.682-.217.682-.482 0-.237-.009-.866-.013-1.7-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z',
-};
-
+/**
+ * DeveloperCard Component
+ * 
+ * An industrial-style ID badge / permit card for the developers.
+ * Featuring glassmorphism, gritty textures, and a "clip-on" aesthetic.
+ */
 export default function DeveloperCard({ developer }: { developer: Developer }) {
   const cardRef = useRef<HTMLDivElement>(null);
-  const initials = developer.name.split(' ').map((n) => n[0]).join('');
+  const clipRef = useRef<SVGSVGElement>(null);
 
   useGSAP(() => {
     if (!cardRef.current) return;
-    gsap.from(cardRef.current, {
-      opacity: 0, y: 30, duration: 0.6, ease: 'power3.out',
-      scrollTrigger: { trigger: cardRef.current, start: 'top 90%' },
-    });
+    
+    // Entrance animation
+    gsap.fromTo(
+      cardRef.current,
+      { opacity: 0, y: 50, rotateX: -10 },
+      { 
+        opacity: 1, 
+        y: 0, 
+        rotateX: 0,
+        duration: 0.8, 
+        ease: 'power4.out',
+        scrollTrigger: {
+          trigger: cardRef.current,
+          start: 'top 90%',
+        }
+      }
+    );
+
+    // Subtle hover tilt effect
+    const onMouseMove = (e: MouseEvent) => {
+      if (!cardRef.current) return;
+      const { left, top, width, height } = cardRef.current.getBoundingClientRect();
+      const x = (e.clientX - left) / width - 0.5;
+      const y = (e.clientY - top) / height - 0.5;
+      
+      gsap.to(cardRef.current, {
+        rotateY: x * 10,
+        rotateX: -y * 10,
+        duration: 0.5,
+        ease: 'power2.out'
+      });
+    };
+
+    const onMouseLeave = () => {
+      gsap.to(cardRef.current, {
+        rotateY: 0,
+        rotateX: 0,
+        duration: 0.5,
+        ease: 'power2.out'
+      });
+    };
+
+    cardRef.current.addEventListener('mousemove', onMouseMove);
+    cardRef.current.addEventListener('mouseleave', onMouseLeave);
+
+    return () => {
+      cardRef.current?.removeEventListener('mousemove', onMouseMove);
+      cardRef.current?.removeEventListener('mouseleave', onMouseLeave);
+    };
   }, { scope: cardRef });
 
   return (
-    <div ref={cardRef} className="glass-card gradient-border p-8 flex flex-col items-center text-center gap-5 group">
-      {/* Avatar */}
-      <div
-        className="w-24 h-24 rounded-full flex items-center justify-center text-2xl font-bold text-white shadow-lg animate-pulse-glow"
-        style={{ background: 'linear-gradient(135deg, var(--accent-coral), var(--accent-sage))' }}
+    <div className="relative group perspective-1000 my-8 py-4">
+      {/* Custom Scoped Styles for Gritty Textures */}
+      <style jsx>{`
+        .id-card-texture {
+          background-image: 
+            radial-gradient(circle at 2px 2px, rgba(255,255,255,0.05) 1px, transparent 0);
+          background-size: 24px 24px;
+        }
+        .noise-texture::after {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+          opacity: 0.04;
+          pointer-events: none;
+          mix-blend-mode: overlay;
+        }
+        .tape-effect {
+          background: rgba(255, 255, 255, 0.1);
+          backdrop-filter: blur(2px);
+          mask-image: linear-gradient(to bottom, black, transparent);
+        }
+        .grid-bg {
+          background-image: linear-gradient(rgba(0, 0, 0, 0.15) 1px, transparent 1px),
+                            linear-gradient(90deg, rgba(0, 0, 0, 0.15) 1px, transparent 1px);
+          background-size: 15px 15px;
+        }
+      `}</style>
+
+      {/* Top Clip */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 z-20 pointer-events-none -translate-y-4">
+        <svg ref={clipRef} width="60" height="40" viewBox="0 0 60 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10 5C10 2.23858 12.2386 0 15 0H45C47.7614 0 50 2.23858 50 5V15H10V5Z" fill="#333" />
+          <path d="M10 15H50V25C50 27.7614 47.7614 30 45 30H15C12.2386 30 10 27.7614 10 25V15Z" fill="#444" />
+          <rect x="25" y="5" width="10" height="20" rx="2" fill="#222" />
+          <circle cx="30" cy="15" r="3" fill="#666" />
+        </svg>
+      </div>
+
+      {/* Main Card Body */}
+      <div 
+        ref={cardRef}
+        className="w-full max-w-[340px] aspect-[1/1.5] bg-[#09090b]/80 backdrop-blur-2xl border border-white/10 rounded-[2.5rem] overflow-hidden shadow-2xl noise-texture relative id-card-texture flex flex-col mx-auto transition-shadow duration-500 hover:shadow-[0_0_50px_rgba(212,100,59,0.2)]"
+        style={{ transformStyle: 'preserve-3d' }}
       >
-        {initials}
+        {/* Header Tags */}
+        <div className="pt-10 px-8 flex justify-between items-start">
+          <div className="flex flex-col gap-1.5">
+            <div className="bg-[#D4643B] text-black text-[10px] font-black px-2 py-0.5 uppercase tracking-tighter">
+              DEV-SEC / CORE
+            </div>
+            <div className="bg-[#D9A84E] text-black text-[8px] font-black px-2 py-0.5 uppercase tracking-tighter">
+              BETA ACCESS 0.17
+            </div>
+          </div>
+          <div className="text-white/20 font-black text-4xl leading-none select-none tracking-tighter">
+            {new Date().getMonth() + 1}.{new Date().getDate()}
+          </div>
+        </div>
+
+        {/* Photo Container */}
+        <div className="flex-1 px-8 py-6 flex flex-col">
+          <div className="relative flex-1 bg-[#D9A84E] rounded-2xl border border-black/5 grid-bg overflow-hidden group/photo box-shadow-inner shadow-2xl">
+            {/* Developer Image Placeholder */}
+            {developer.image ? (
+              <Image 
+                src={developer.image} 
+                alt={developer.name}
+                fill
+                className="object-cover grayscale group-hover/photo:grayscale-0 transition-all duration-700 scale-105 group-hover/photo:scale-110"
+              />
+            ) : (
+              <div className="w-full h-full flex items-center justify-center text-white/10 italic text-sm font-mono">
+                NO_SIGNAL // AVATAR_MISSING
+              </div>
+            )}
+            
+            {/* Sticker Overlays */}
+            <div className="absolute top-6 left-6 -rotate-12 bg-white text-black px-4 py-1 font-black text-2xl shadow-2xl border border-black/10 select-none transform transition-transform group-hover/photo:-rotate-6">
+              {developer.name.split(' ')[0]}
+            </div>
+
+            <div className="absolute bottom-8 right-0 translate-x-1/4 rotate-12 bg-[#7A9A6B] text-black px-5 py-1.5 font-black text-xs shadow-2xl select-none transform transition-transform group-hover/photo:rotate-3">
+              VERIFIED
+            </div>
+
+            {/* Scanning line animation overlay hint */}
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#D4643B]/20 to-transparent h-1/3 w-full -translate-y-full group-hover/photo:animate-[scan_3s_linear_infinite] pointer-events-none" />
+          </div>
+        </div>
+
+        {/* Bottom Branding Section */}
+        <div className="px-8 pb-10">
+          <div className="flex items-center gap-4 mb-4">
+            <div className="flex-1">
+              <h3 className="text-white font-black text-4xl leading-none uppercase tracking-tighter italic">
+                WnCC <span className="text-[#D4643B]">NITP</span>
+              </h3>
+              <p className="text-[#D4643B] font-mono text-[10px] mt-2 uppercase tracking-[0.2em] font-black">
+                {developer.role}
+              </p>
+            </div>
+            
+            {/* Barcode representation */}
+            <div className="flex gap-[3px] opacity-30 mt-auto">
+              {[3, 5, 2, 4, 2, 6, 3, 2, 5].map((w, i) => (
+                <div key={i} className="bg-white h-10" style={{ width: `${w}px` }} />
+              ))}
+            </div>
+          </div>
+
+          <div className="border-t border-white/5 pt-4 flex flex-wrap gap-2">
+            {developer.techStack.slice(0, 4).map((tech) => (
+              <span key={tech} className="text-[9px] font-black border border-white/10 px-3 py-1 text-white/50 rounded-md uppercase tracking-widest bg-white/5">
+                {tech}
+              </span>
+            ))}
+          </div>
+
+          {/* Tape / Stamp Effect at bottom right */}
+          <div className="absolute bottom-4 right-[-10px] rotate-[-15deg] w-28 h-10 tape-effect border border-white/10 flex items-center justify-center opacity-20 group-hover:opacity-100 transition-all duration-500 pointer-events-none">
+            <span className="text-[9px] text-[#7A9A6B] font-black uppercase tracking-tighter shadow-sm">PERMIT_GRANTED_2026</span>
+          </div>
+        </div>
       </div>
 
-      <div>
-        <h3 className="text-lg font-semibold text-[var(--text-primary)]" style={{ fontFamily: 'var(--font-display)' }}>
-          {developer.name}
-        </h3>
-        <p className="text-mono text-[0.65rem] mt-1 text-[var(--accent-coral)]">{developer.role}</p>
-      </div>
-
-      {/* Contributions */}
-      <div className="flex flex-wrap justify-center gap-1.5">
-        {developer.contributions.map((c) => (
-          <span key={c} className="tag text-[0.6rem]">{c}</span>
-        ))}
-      </div>
-
-      {/* Tech Stack */}
-      <div className="flex flex-wrap justify-center gap-1.5">
-        {developer.techStack.map((tech) => (
-          <span
-            key={tech}
-            className="text-[0.6rem] px-2 py-0.5 rounded-full bg-[var(--accent-sage-dim)] text-[var(--accent-sage)] font-medium"
-          >
-            {tech}
-          </span>
-        ))}
-      </div>
-
-      {/* Social links */}
-      <div className="flex items-center gap-4 mt-2">
-        {developer.socials.linkedin && (
-          <a href={developer.socials.linkedin} target="_blank" rel="noopener noreferrer" className="text-[var(--text-muted)] hover:text-[var(--accent-coral)] transition-colors">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d={socialIcons.linkedin} /></svg>
-          </a>
-        )}
-        {developer.socials.github && (
-          <a href={developer.socials.github} target="_blank" rel="noopener noreferrer" className="text-[var(--text-muted)] hover:text-[var(--accent-coral)] transition-colors">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d={socialIcons.github} /></svg>
-          </a>
-        )}
-        {developer.socials.email && (
-          <a href={`mailto:${developer.socials.email}`} className="text-[var(--text-muted)] hover:text-[var(--accent-coral)] transition-colors">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-              <polyline points="22,6 12,13 2,6" />
-            </svg>
-          </a>
-        )}
-      </div>
+      {/* Global CSS for Animations */}
+      <style jsx global>{`
+        @keyframes scan {
+          0% { transform: translateY(-100%); }
+          100% { transform: translateY(300%); }
+        }
+        .perspective-1000 {
+          perspective: 1000px;
+        }
+      `}</style>
+      
+      {/* Background Glow */}
+      <div className="absolute inset-0 bg-[#D4643B]/5 blur-[120px] rounded-full scale-0 group-hover:scale-125 transition-transform duration-1000 -z-10" />
     </div>
   );
 }
