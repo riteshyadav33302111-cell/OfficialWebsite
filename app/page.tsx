@@ -1,5 +1,4 @@
 import HeroSection from '@/components/landing/HeroSection';
-import AboutSection from '@/components/landing/AboutSection';
 import PIPresidentSection from '@/components/landing/PIPresidentSection';
 import BentoGrid from '@/components/landing/BentoGrid';
 import GalleryPreview from '@/components/landing/GalleryPreview';
@@ -11,8 +10,6 @@ export default function Home() {
   return (
     <main>
       <HeroSection />
-      <hr className="section-divider" />
-      <AboutSection />
       <hr className="section-divider" />
       <PIPresidentSection />
       <hr className="section-divider" />
