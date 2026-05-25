@@ -39,8 +39,7 @@ export default function HeroSection() {
       .from('.hero-tagline', { opacity: 0, y: 20, duration: 0.5 }, '-=0.3')
       .from('.hero-stats > div', { opacity: 0, y: 20, stagger: 0.1, duration: 0.5 }, '-=0.2')
       .from('.hero-cta', { opacity: 0, y: 20, stagger: 0.15, duration: 0.5 }, '-=0.2')
-      .from('.hero-scroll-indicator', { opacity: 0, duration: 0.6 }, '-=0.1')
-      .from('.rock-container', { opacity: 0, scale: 0.8, duration: 0.8, ease: 'back.out(1.4)' }, '-=0.4');
+      .from('.hero-scroll-indicator', { opacity: 0, duration: 0.6 }, '-=0.1');
   }, { scope: pinnedRef });
   /* ── Scroll-driven animation (scrub) ── */
   useGSAP(() => {
@@ -66,17 +65,6 @@ export default function HeroSection() {
     scrollTl.to(
       '.hero-scroll-indicator',
       { opacity: 0, y: 20, duration: 0.15 },
-      0
-    );
-    /* Rock SVG translates from right to left: 0% → 100% */
-    scrollTl.fromTo(
-      '.rock-container',
-      { x: '0%' },
-      {
-        x: isMobile ? '0%' : '-120%',
-        duration: 1,
-        ease: 'none',
-      },
       0
     );
     /* Background overlay (darken for transition): 30% → 60% */
@@ -137,11 +125,12 @@ export default function HeroSection() {
         {/* ── Background layers ── */}
         <div className="hero-about-bg">
           <Image
-            src="/images/graffiti/hero-bg.png"
+            src="/images/graffiti/hero-bg.svg"
             alt=""
             fill
-            className="hero-bg-image object-cover opacity-20"
+            className="hero-bg-image object-cover opacity-98"
             priority
+            unoptimized
           />
           <div className="hero-about-bg-gradient" />
         </div>
@@ -169,16 +158,6 @@ export default function HeroSection() {
           <br />
           Club
         </h1> */}
-        {/* ── Rock SVG ── */}
-        <div className="rock-container">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/assets/rock.svg"
-            alt=""
-            className="rock-svg"
-            draggable={false}
-          />
-        </div> 
         {/* <p className="hero-subtitle text-heading text-[var(--text-secondary)]" style={{ fontFamily: 'var(--font-display)' }}>
           NIT Patna
         </p> */}

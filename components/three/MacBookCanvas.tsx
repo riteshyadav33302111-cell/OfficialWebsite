@@ -64,7 +64,7 @@ export default function MacBookCanvas({ scrollProgress, isMobile }: MacBookCanva
     >
       {/* ── Lighting: Three‑point cinematic setup ── */}
       {/* Ambient baseline */}
-      <ambientLight intensity={0.6} />
+      <ambientLight intensity={0.9} />
 
       {/* Key light — strong front-right directional */}
       <directionalLight

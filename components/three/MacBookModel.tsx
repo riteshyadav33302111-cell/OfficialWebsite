@@ -43,21 +43,24 @@ export default function MacBookModel({ scrollProgress, isMobile }: MacBookModelP
 
     // ---- Position ----
     // X: Start right (positive), end left (negative)
-    const startX = isMobile ? 0 : 3.5;
-    const endX = isMobile ? 0 : -3.5;
+    const startX = isMobile ? 0 : 2.5;
+    const endX = isMobile ? 0 : -2.5;
     const targetX = THREE.MathUtils.lerp(startX, endX, progress);
 
     // Y: Gentle floating bob
     const floatAmplitude = 0.12;
     const floatSpeed = 0.6;
-    const targetY = Math.sin(time * floatSpeed) * floatAmplitude;
+    const baseY = -0.6; // Moved a little below
+    const targetY = baseY + Math.sin(time * floatSpeed) * floatAmplitude;
 
     // Z: Slight push back at midpoint for depth feel
     const targetZ = -Math.sin(progress * Math.PI) * 0.8;
 
     // ---- Rotation ----
-    // Full 360° Y rotation over scroll
-    const targetRotY = progress * Math.PI * 2;
+    // Start 10 degrees clockwise, rotate a full 360 + 20 degrees anticlockwise (total 380 deg rotation)
+    const startRotY = -10 * (Math.PI / 180);
+    const rotationDelta = 380 * (Math.PI / 180);
+    const targetRotY = startRotY + progress * rotationDelta;
     // Subtle X tilt for dynamism
     const targetRotX = Math.sin(progress * Math.PI) * 0.15;
 
