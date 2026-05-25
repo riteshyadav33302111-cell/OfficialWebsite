@@ -47,11 +47,11 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
   return (
     <div
       ref={menuRef}
-      className="fixed inset-0 z-[60] bg-[rgba(10,10,10,0.97)] backdrop-blur-xl flex flex-col"
+      className="fixed inset-0 z-[60] bg-[rgba(5,5,5,0.97)] backdrop-blur-xl flex flex-col"
     >
       {/* Close Button */}
       <div className="flex justify-end p-6">
-        <button onClick={onClose} className="p-2 text-[var(--text-secondary)] hover:text-[var(--accent-coral)] transition-colors" aria-label="Close menu">
+        <button onClick={onClose} className="p-2 text-[var(--text-secondary)] hover:text-[var(--accent-primary)] transition-colors" aria-label="Close menu">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <path d="M18 6L6 18M6 6l12 12" />
           </svg>
@@ -65,7 +65,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             key={link.href}
             href={link.href}
             onClick={onClose}
-            className="text-3xl font-bold text-[var(--text-primary)] hover:text-[var(--accent-coral)] transition-colors"
+            className="text-3xl font-bold text-[var(--text-primary)] hover:text-[var(--accent-primary)] transition-colors"
             style={{ fontFamily: 'var(--font-display)' }}
           >
             {link.label}
@@ -81,7 +81,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             href={social.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[var(--text-muted)] hover:text-[var(--accent-coral)] transition-colors"
+            className="text-[var(--text-muted)] hover:text-[var(--accent-primary)] transition-colors"
             aria-label={social.name}
           >
             <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">

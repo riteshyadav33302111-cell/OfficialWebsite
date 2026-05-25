@@ -7,14 +7,14 @@ import { gsap, ScrollTrigger } from '@/hooks/useGSAPAnimation';
 interface SectionHeaderProps {
   title: string;
   subtitle?: string;
-  accent?: 'coral' | 'amber' | 'sage';
+  accent?: 'primary' | 'secondary' | 'coral' | 'amber' | 'sage';
   align?: 'left' | 'center';
 }
 
 export default function SectionHeader({
   title,
   subtitle,
-  accent = 'coral',
+  accent = 'primary',
   align = 'center',
 }: SectionHeaderProps) {
   const containerRef = useRef<HTMLDivElement>(null);

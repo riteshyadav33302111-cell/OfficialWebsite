@@ -32,73 +32,73 @@ export default function BentoGrid() {
     switch (id) {
       case 'tech-talks':
         return {
-          cardBg: 'bg-gradient-to-br from-[#12113a] via-[#091e4a] to-[#00b4ed]',
+          cardBg: 'bg-gradient-to-br from-[#0a0f14] via-[#0d1520] to-[#08120e]',
           textColor: 'text-white',
           descColor: 'text-white/70',
           showTextLogo: 'A'
         };
       case 'hackathons':
         return {
-          cardBg: 'bg-gradient-to-b from-[#2de2ff] via-[#00aaff] to-[#0a48b3]',
-          textColor: 'text-[#061533]',
-          descColor: 'text-[#061533]/80',
+          cardBg: 'bg-gradient-to-b from-[#00D4FF] via-[#00BFFF] to-[#006680]',
+          textColor: 'text-[#050505]',
+          descColor: 'text-[#050505]/80',
         };
       case 'open-source':
         return {
-          cardBg: 'bg-gradient-to-br from-[#00c6ff] via-[#e6faff] to-white',
-          textColor: 'text-[#0c244d]',
-          descColor: 'text-[#0c244d]/70',
+          cardBg: 'bg-gradient-to-br from-[#00D4FF]/20 via-[#0a141a] to-[#050505]',
+          textColor: 'text-[#F1F3F5]',
+          descColor: 'text-[#A1A6B4]',
           showGraphLine: true
         };
       case 'workshops':
         return {
-          cardBg: 'bg-gradient-to-b from-[#0b0f19] via-[#0f172a] to-[#1e293b] border border-white/10',
+          cardBg: 'bg-gradient-to-b from-[#0F1012] via-[#17181C] to-[#1E2025] border border-white/10',
           textColor: 'text-white',
           descColor: 'text-gray-400',
           showDonutChart: true
         };
       case 'peer-learning':
         return {
-          cardBg: 'bg-gradient-to-br from-[#12113a] via-[#091e4a] to-[#00b4ed]',
+          cardBg: 'bg-gradient-to-br from-[#0a0f14] via-[#0d1520] to-[#0a1a10]',
           textColor: 'text-white',
           descColor: 'text-white/70',
           showTvGuy: true
         };
       case 'community-events':
         return {
-          cardBg: 'bg-gradient-to-b from-[#0b1b3d] to-[#040914] border border-cyan-500/20',
+          cardBg: 'bg-gradient-to-b from-[#1a0508] to-[#050505] border border-[#FF003C]/20',
           textColor: 'text-white',
           descColor: 'text-gray-400',
           showRobotFace: true
         };
       case 'project-mentoring':
         return {
-          cardBg: 'bg-gradient-to-b from-[#00f2fe] via-[#4facfe] to-[#00c6ff]',
-          textColor: 'text-[#031b4e]',
-          descColor: 'text-[#031b4e]/80',
+          cardBg: 'bg-gradient-to-b from-[#00D4FF] via-[#00BFFF] to-[#00A3CC]',
+          textColor: 'text-[#050505]',
+          descColor: 'text-[#050505]/80',
           showVrOverlay: true
         };
       case 'code-challenges':
         return {
-          cardBg: 'bg-gradient-to-br from-[#061329] via-[#0b2b5c] to-[#00d2ff] border border-white/5',
+          cardBg: 'bg-gradient-to-br from-[#050505] via-[#0A0A0C] to-[#00D4FF]/10 border border-white/5',
           textColor: 'text-white',
           descColor: 'text-white/60',
           showVLogo: true
         };
       case 'industry-connect':
         return {
-          cardBg: 'bg-gradient-to-b from-[#0b0f19] via-[#0f172a] to-[#1e293b] border border-white/10',
+          cardBg: 'bg-gradient-to-b from-[#0F1012] via-[#17181C] to-[#1E2025] border border-white/10',
           textColor: 'text-white',
           descColor: 'text-gray-400',
           isWideLogo: true
         };
       default:
-        return { cardBg: 'bg-slate-900', textColor: 'text-white', descColor: 'text-gray-400' };
+        return { cardBg: 'bg-[#17181C]', textColor: 'text-white', descColor: 'text-gray-400' };
     }
   };
 
   return (
-    <section ref={sectionRef} className="section-padding bg-[#020408] text-white overflow-hidden">
+    <section ref={sectionRef} className="section-padding bg-[#08080A] text-white overflow-hidden">
       {/* Dynamic Structural Responsive Grid Engine */}
       <style dangerouslySetInnerHTML={{ __html: `
         /* 📱 Tablet Viewports (Clean 2-Column Grid Setup) */
@@ -139,7 +139,7 @@ export default function BentoGrid() {
       `}} />
 
       <div className="container-wide px-4 md:px-8 mx-auto">
-        <SectionHeader title="What We Offer" subtitle="A complete ecosystem for tech enthusiasts" accent="sage" />
+        <SectionHeader title="What We Offer" subtitle="A complete ecosystem for tech enthusiasts" accent="primary" />
 
         {/* Base Structural Container Grid */}
         <div className="bento-grid-container grid grid-cols-1 gap-6 mt-10">
@@ -148,7 +148,7 @@ export default function BentoGrid() {
             return (
               <div
                 key={feature.id}
-                className={`bento-item bento-${feature.id} p-6 md:p-8 flex flex-col justify-between gap-5 group cursor-default relative overflow-hidden rounded-[24px] shadow-lg transition-all duration-500 hover:-translate-y-1 hover:shadow-cyan-500/10 ${styles.cardBg}`}
+                className={`bento-item bento-${feature.id} p-6 md:p-8 flex flex-col justify-between gap-5 group cursor-default relative overflow-hidden rounded-[24px] shadow-lg transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,212,255,0.08)] ${styles.cardBg}`}
               >
                 {/* Visual Accent Layer */}
                 <div className="absolute top-0 left-0 right-0 h-[3px]" style={{ backgroundColor: feature.color }} />
@@ -171,7 +171,7 @@ export default function BentoGrid() {
                 )}
 
                 {styles.showDonutChart && (
-                  <div className="absolute right-6 top-8 w-20 h-20 opacity-20 pointer-events-none rounded-full border-4 border-dashed border-cyan-400 animate-spin-slow" />
+                  <div className="absolute right-6 top-8 w-20 h-20 opacity-20 pointer-events-none rounded-full border-4 border-dashed border-[#FF003C] animate-spin-slow" />
                 )}
 
                 {/* Main Content Layout */}
@@ -179,7 +179,7 @@ export default function BentoGrid() {
                   <div className="flex justify-between items-start">
                     <span className="text-3xl mb-1 block filter drop-shadow-md">{feature.icon}</span>
                     {styles.isWideLogo && (
-                      <span className="text-xl font-black italic tracking-tighter text-cyan-400">WnCC</span>
+                      <span className="text-xl font-black italic tracking-tighter text-[#00D4FF]">WnCC</span>
                     )}
                   </div>
                   
@@ -202,7 +202,7 @@ export default function BentoGrid() {
                 )}
 
                 {styles.showVLogo && (
-                  <div className="absolute bottom-2 right-4 text-7xl font-black italic opacity-20 text-cyan-400 select-none">
+                  <div className="absolute bottom-2 right-4 text-7xl font-black italic opacity-20 text-[#00D4FF] select-none">
                     V
                   </div>
                 )}

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { NAV_LINKS } from '@/lib/data/navigation';
 import MobileMenu from './MobileMenu';
@@ -22,16 +23,14 @@ export default function Header() {
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled
-            ? 'bg-[rgba(10,10,10,0.85)] backdrop-blur-xl border-b border-[var(--border-subtle)]'
+            ? 'bg-[rgba(5,5,5,0.9)] backdrop-blur-xl border-b border-[var(--border-subtle)]'
             : 'bg-transparent'
         }`}
       >
         <div className="container-wide flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-baseline gap-2 group">
-            <span className="text-xl md:text-2xl font-bold gradient-text-coral" style={{ fontFamily: 'var(--font-display)' }}>
-              WnCC
-            </span>
+          <Link href="/" className="flex items-center gap-2.5 group">
+            <Image src="/images/logo.png" alt="WnCC" width={36} height={36} className="rounded-sm" />
             <span className="text-xs text-[var(--text-muted)] tracking-widest uppercase hidden sm:inline">
               NIT Patna
             </span>
@@ -47,13 +46,13 @@ export default function Header() {
                   href={link.href}
                   className={`relative px-4 py-2 text-sm font-medium transition-colors duration-300 rounded-lg ${
                     isActive
-                      ? 'text-[var(--accent-coral)]'
+                      ? 'text-[var(--accent-primary)]'
                       : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
                   }`}
                 >
                   {link.label}
                   {isActive && (
-                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-4 h-[2px] rounded-full bg-[var(--accent-coral)]" />
+                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-4 h-[2px] rounded-full bg-[var(--accent-primary)]" />
                   )}
                 </Link>
               );
@@ -76,7 +75,7 @@ export default function Header() {
               aria-label="Open menu"
             >
               <span className="w-6 h-[2px] bg-[var(--text-primary)] transition-all duration-300" />
-              <span className="w-4 h-[2px] bg-[var(--accent-coral)] transition-all duration-300" />
+              <span className="w-4 h-[2px] bg-[var(--accent-primary)] transition-all duration-300" />
               <span className="w-6 h-[2px] bg-[var(--text-primary)] transition-all duration-300" />
             </button>
           </div>

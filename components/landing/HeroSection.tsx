@@ -169,7 +169,7 @@ export default function HeroSection() {
         {/* <p className="hero-tagline text-body max-w-lg text-lg">
           {SITE_CONFIG.tagline}. {SITE_CONFIG.description.slice(0, 120)}...
         </p> */}
-          <h1 className="hero-title text-display gradient-text-coral">
+          <h1 className="hero-title text-display gradient-text-primary">
             Web &amp; Coding
             <br />
             Club
@@ -236,10 +236,10 @@ export default function HeroSection() {
             <div
               className="h-[2px] w-16 rounded-full mb-4"
               style={{
-                background: 'linear-gradient(90deg, var(--accent-coral), transparent)',
+                background: 'linear-gradient(90deg, var(--accent-primary), transparent)',
               }}
             />
-            <h2 className="text-heading gradient-text-coral">About Us</h2>
+            <h2 className="text-heading gradient-text-secondary">About Us</h2>
             <p className="text-body max-w-md mt-2">What drives us forward</p>
           </div>
           {/* About description */}

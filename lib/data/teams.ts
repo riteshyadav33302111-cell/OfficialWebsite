@@ -12,7 +12,7 @@ export const TEAMS: Team[] = [
     description:
       'Building modern, performant web applications using cutting-edge frameworks. From static sites to full-stack platforms, we ship production-grade products.',
     icon: '🌐',
-    color: '#D4643B',
+    color: '#00D4FF',
     leader: {
       id: 'web-lead',
       name: 'Arjun Mehta',
@@ -82,7 +82,7 @@ export const TEAMS: Team[] = [
     description:
       'Exploring decentralized technologies, smart contracts, and Web3. Building DApps and learning Solidity, Ethereum, and beyond.',
     icon: '⛓',
-    color: '#D9A84E',
+    color: '#00BFFF',
     leader: {
       id: 'blockchain-lead',
       name: 'Kavya Reddy',
@@ -128,7 +128,7 @@ export const TEAMS: Team[] = [
     description:
       'Pushing the boundaries of generative AI — from LLMs and prompt engineering to building AI-powered tools and applications.',
     icon: '🤖',
-    color: '#7A9A6B',
+    color: '#FF003C',
     leader: {
       id: 'genai-lead',
       name: 'Rishi Verma',
@@ -174,7 +174,7 @@ export const TEAMS: Team[] = [
     description:
       'Data science, neural networks, and classical ML. From Kaggle competitions to research papers — we crunch data and build models.',
     icon: '🧠',
-    color: '#D4643B',
+    color: '#FF3366',
     leader: {
       id: 'ml-lead',
       name: 'Deepak Nair',
@@ -220,7 +220,7 @@ export const TEAMS: Team[] = [
     description:
       'Managing the public face of WnCC. From outreach and sponsorships to partnerships — we connect the club with the world.',
     icon: '📢',
-    color: '#D9A84E',
+    color: '#00A3CC',
     leader: {
       id: 'pr-lead',
       name: 'Ishita Agarwal',
@@ -254,7 +254,7 @@ export const TEAMS: Team[] = [
     description:
       'Crafting the club\'s digital presence across platforms. Content strategy, engagement, and building an online community that resonates.',
     icon: '📱',
-    color: '#7A9A6B',
+    color: '#E60036',
     leader: {
       id: 'sm-lead',
       name: 'Raghav Tiwari',
@@ -289,7 +289,7 @@ export const TEAMS: Team[] = [
     description:
       'Visual storytelling through UI/UX design, graphics, and branding. We make technology beautiful and accessible.',
     icon: '🎨',
-    color: '#8A8A8A',
+    color: '#A1A6B4',
     leader: {
       id: 'design-lead',
       name: 'Sanya Kapoor',

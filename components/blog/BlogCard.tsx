@@ -29,7 +29,7 @@ export default function BlogCard({ post }: { post: BlogPost }) {
           </div>
 
           {/* Title */}
-          <h3 className="text-lg font-semibold text-[var(--text-primary)] group-hover:text-[var(--accent-coral)] transition-colors line-clamp-2" style={{ fontFamily: 'var(--font-display)' }}>
+          <h3 className="text-lg font-semibold text-[var(--text-primary)] group-hover:text-[var(--accent-primary)] transition-colors line-clamp-2" style={{ fontFamily: 'var(--font-display)' }}>
             {post.title}
           </h3>
 
@@ -42,7 +42,7 @@ export default function BlogCard({ post }: { post: BlogPost }) {
           <div className="flex items-center gap-3 pt-3 border-t border-[var(--border-subtle)]">
             <div
               className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-white flex-shrink-0"
-              style={{ background: 'linear-gradient(135deg, var(--accent-coral), var(--accent-amber))' }}
+              style={{ background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))' }}
             >
               {initials}
             </div>

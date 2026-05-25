@@ -23,7 +23,7 @@ const socialHoverBackgrounds: Record<string, string> = {
 
 export default function Footer() {
   return (
-    <footer className="relative overflow-hidden border-t border-white/10 bg-[#171717]">
+    <footer className="relative overflow-hidden border-t border-white/10 bg-[#0A0A0C]">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.06),transparent_26%),radial-gradient(circle_at_bottom_right,rgba(212,100,59,0.12),transparent_26%),linear-gradient(180deg,rgba(255,255,255,0.02),transparent_30%)]" />
       <div className="pointer-events-none absolute inset-0 opacity-18 bg-[radial-gradient(rgba(255,255,255,0.12)_1px,transparent_1px)] bg-size-[22px_22px]" />
 
@@ -43,7 +43,7 @@ export default function Footer() {
                     className="group flex items-center justify-between border-b border-white/10 py-1.5 text-xs text-(--text-secondary) transition-all duration-300 hover:border-white/20 hover:text-(--text-primary) md:text-sm"
                   >
                     <span className="transition-transform duration-300 group-hover:translate-x-1">{link.label}</span>
-                    <span className="text-(--accent-sage) transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-0.5">↗</span>
+                    <span className="text-(--accent-primary) transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-0.5">↗</span>
                   </Link>
                 </li>
               ))}
@@ -137,7 +137,7 @@ export default function Footer() {
                   aria-label={social.name}
                 >
                   <span className="transition-transform duration-300 group-hover:translate-x-1">{social.name}</span>
-                  <span className="text-(--accent-coral) transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-0.5">↗</span>
+                  <span className="text-(--accent-primary) transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-0.5">↗</span>
                 </a>
               ))}
             </div>

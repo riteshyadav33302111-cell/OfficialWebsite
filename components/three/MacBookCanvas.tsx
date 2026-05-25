@@ -7,32 +7,11 @@ import MacBookModel from './MacBookModel';
 
 /* ─── Loading overlay shown while the GLB is downloading ─── */
 function ModelLoader() {
-  const { progress, active } = useProgress();
-  const [visible, setVisible] = useState(true);
-
-  useEffect(() => {
-    if (!active && progress === 100) {
-      // Give a short delay for GPU to finish parsing
-      const timer = setTimeout(() => setVisible(false), 600);
-      return () => clearTimeout(timer);
-    }
-  }, [active, progress]);
-
-  // Safety timeout — never block longer than 8 seconds
-  useEffect(() => {
-    const safety = setTimeout(() => setVisible(false), 8000);
-    return () => clearTimeout(safety);
-  }, []);
-
-  if (!visible) return null;
-
   return (
     <Html center>
       <div className="model-loader">
         <div className="model-loader__spinner" />
-        <p className="model-loader__text">
-          {Math.round(progress)}%
-        </p>
+        <p className="model-loader__text">Loading 3D...</p>
       </div>
     </Html>
   );
@@ -84,15 +63,15 @@ export default function MacBookCanvas({ scrollProgress, isMobile }: MacBookCanva
       {/* Rim/back light for edge separation */}
       <directionalLight
         position={[0, 5, -10]}
-        intensity={0.5}
-        color="#D4643B"
+        intensity={0.8}
+        color="#FF003C"
       />
 
-      {/* Warm ground-bounce point light */}
+      {/* Cool ground-bounce point light */}
       <pointLight
         position={[0, -3, 12]}
-        intensity={0.6}
-        color="#D4A574"
+        intensity={0.8}
+        color="#00D4FF"
         distance={30}
       />
 

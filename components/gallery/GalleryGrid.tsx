@@ -93,14 +93,14 @@ export default function GalleryGrid({ images, categories }: GalleryGridProps) {
                 onClick={() => { setActiveCategory(cat); setLightboxIndex(null); }}
                 className={`group relative flex items-center gap-2 px-5 py-2 rounded-2xl text-xs font-semibold uppercase tracking-wider transition-all duration-300 cursor-pointer overflow-hidden ${
                   isActive
-                    ? 'text-white border border-[var(--accent-coral)]/40 shadow-[0_0_15px_rgba(244,63,94,0.2)] bg-[var(--accent-coral-dim)]'
+                    ? 'text-white border border-[var(--accent-secondary)]/40 shadow-[0_0_15px_rgba(255,0,60,0.2)] bg-[var(--accent-secondary-dim)]'
                     : 'text-white/60 border border-transparent hover:bg-white/5 hover:text-white'
                 }`}
               >
                 <span className="relative z-10 flex items-center gap-2">
                   {cat}
                   <span className={`flex items-center justify-center px-1.5 py-0.5 rounded text-[9px] min-w-[16px] transition-all duration-300 ${
-                    isActive ? 'bg-white text-[var(--accent-coral)] font-extrabold' : 'bg-white/10 text-white/40 group-hover:bg-white/20'
+                    isActive ? 'bg-white text-[var(--accent-secondary)] font-extrabold' : 'bg-white/10 text-white/40 group-hover:bg-white/20'
                   }`}>
                     {counts[cat] || 0}
                   </span>
@@ -118,14 +118,14 @@ export default function GalleryGrid({ images, categories }: GalleryGridProps) {
             key={img.id}
             role="button"
             tabIndex={0}
-            className={`group relative rounded-2xl overflow-hidden cursor-pointer border border-white/5 bg-neutral-900/30 shadow-lg transition-all duration-500 hover:shadow-[0_15px_35px_rgba(0,0,0,0.5)] focus:outline-none focus:ring-2 focus:ring-[var(--accent-coral)] col-span-1 ${getGridSpan(img)}`}
+            className={`group relative rounded-2xl overflow-hidden cursor-pointer border border-white/5 bg-neutral-900/30 shadow-lg transition-all duration-500 hover:shadow-[0_15px_35px_rgba(0,0,0,0.5)] focus:outline-none focus:ring-2 focus:ring-[var(--accent-primary)] col-span-1 ${getGridSpan(img)}`}
             onClick={() => openLightbox(index)}
             onKeyDown={(e) => {
               if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(index); }
             }}
           >
-            <div className="absolute inset-0 border border-white/0 rounded-2xl group-hover:border-[var(--accent-coral)]/30 group-hover:shadow-[inset_0_0_20px_rgba(244,63,94,0.12)] transition-all duration-500 z-10 pointer-events-none" />
-            <div className="absolute top-4 left-4 z-10 flex items-center justify-center w-8 h-8 rounded-lg bg-black/70 backdrop-blur-md border border-white/10 text-[var(--accent-coral)] opacity-0 group-hover:opacity-100 transform -translate-x-2 group-hover:translate-x-0 transition-all duration-300">
+            <div className="absolute inset-0 border border-white/0 rounded-2xl group-hover:border-[var(--accent-primary)]/30 group-hover:shadow-[inset_0_0_20px_rgba(0,212,255,0.12)] transition-all duration-500 z-10 pointer-events-none" />
+            <div className="absolute top-4 left-4 z-10 flex items-center justify-center w-8 h-8 rounded-lg bg-black/70 backdrop-blur-md border border-white/10 text-[var(--accent-primary)] opacity-0 group-hover:opacity-100 transform -translate-x-2 group-hover:translate-x-0 transition-all duration-300">
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
               </svg>
@@ -146,13 +146,13 @@ export default function GalleryGrid({ images, categories }: GalleryGridProps) {
             <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/30 to-transparent opacity-65 group-hover:opacity-90 transition-opacity duration-300 flex items-end p-6" />
             <div className="absolute bottom-0 inset-x-0 p-6 z-10 transform translate-y-1.5 group-hover:translate-y-0 transition-transform duration-300">
               <div className="flex flex-col gap-1">
-                <h4 className="text-base md:text-lg font-bold text-white tracking-wide group-hover:text-[var(--accent-coral)] transition-colors duration-300">
+                <h4 className="text-base md:text-lg font-bold text-white tracking-wide group-hover:text-[var(--accent-primary)] transition-colors duration-300">
                   {img.event}
                 </h4>
                 <div className="flex items-center gap-2 text-xs text-white/50 mt-0.5">
                   <span>{img.date}</span>
-                  <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-coral)] shadow-[0_0_8px_var(--accent-coral)]" />
-                  <span className="text-[var(--accent-coral)] font-semibold">{img.category}</span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-secondary)] shadow-[0_0_8px_var(--accent-secondary)]" />
+                  <span className="text-[var(--accent-secondary)] font-semibold">{img.category}</span>
                 </div>
               </div>
             </div>
@@ -171,7 +171,7 @@ export default function GalleryGrid({ images, categories }: GalleryGridProps) {
           <h4 className="text-lg font-bold text-white mb-2 tracking-wide">No Records Found</h4>
           <button 
             onClick={() => setActiveCategory('All')}
-            className="px-6 py-2.5 text-xs font-semibold uppercase tracking-wider text-white bg-[var(--accent-coral)] rounded-full hover:bg-[var(--accent-coral)]/85 hover:scale-105 active:scale-95 shadow-[0_0_15px_rgba(244,63,94,0.3)] transition-all duration-300 cursor-pointer"
+            className="px-6 py-2.5 text-xs font-semibold uppercase tracking-wider text-white bg-[var(--accent-primary)] rounded-full hover:bg-[var(--accent-primary)]/85 hover:scale-105 active:scale-95 shadow-[0_0_15px_rgba(0,212,255,0.3)] transition-all duration-300 cursor-pointer"
           >
             Show All Snapshots
           </button>
@@ -231,7 +231,7 @@ export default function GalleryGrid({ images, categories }: GalleryGridProps) {
             </div>
             
             <div className="w-full max-w-4xl mt-5 text-center px-4">
-              <div className="inline-flex items-center gap-2 px-3 py-1 mb-2.5 rounded-full bg-[var(--accent-coral-dim)] border border-[var(--accent-coral)]/30 text-[var(--accent-coral)] text-[9px] font-extrabold uppercase tracking-widest">
+              <div className="inline-flex items-center gap-2 px-3 py-1 mb-2.5 rounded-full bg-[var(--accent-secondary-dim)] border border-[var(--accent-secondary)]/30 text-[var(--accent-secondary)] text-[9px] font-extrabold uppercase tracking-widest">
                 {filtered[lightboxIndex].category}
               </div>
               <h3 className="text-lg md:text-xl font-extrabold text-white tracking-wide line-clamp-1 leading-tight">
@@ -265,7 +265,7 @@ export default function GalleryGrid({ images, categories }: GalleryGridProps) {
                   onClick={(e) => { e.stopPropagation(); setLightboxIndex(idx); }}
                   className={`relative flex-shrink-0 w-14 h-10 rounded-lg overflow-hidden transition-all duration-300 cursor-pointer ${
                     idx === lightboxIndex
-                      ? 'ring-2 ring-[var(--accent-coral)] scale-110 opacity-100 shadow-[0_0_15px_rgba(244,63,94,0.5)]'
+                      ? 'ring-2 ring-[var(--accent-primary)] scale-110 opacity-100 shadow-[0_0_15px_rgba(0,212,255,0.5)]'
                       : 'opacity-35 hover:opacity-80'
                   }`}
                 >

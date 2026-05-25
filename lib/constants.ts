@@ -44,16 +44,22 @@ export const STATS = [
   { value: 7, suffix: '', label: 'Specialized Teams' },
 ] as const;
 
-/** Retro-industrial color palette */
+/** Electric Blue & Neon Red color palette */
 export const COLORS = {
+  primary: '#00D4FF',
+  primaryDim: 'rgba(0, 212, 255, 0.12)',
+  primaryGlow: 'rgba(0, 212, 255, 0.25)',
+  secondary: '#FF003C',
+  secondaryDim: 'rgba(255, 0, 60, 0.12)',
+  secondaryGlow: 'rgba(255, 0, 60, 0.25)',
   coral: '#D4643B',
   amber: '#D9A84E',
   sage: '#7A9A6B',
-  gray: '#8A8A8A',
-  cream: '#F5F0E8',
-  black: '#0a0a0a',
-  darkGray: '#141414',
-  midGray: '#1e1e1e',
+  neutral: '#A1A6B4',
+  text: '#F1F3F5',
+  bgPrimary: '#050505',
+  bgCard: '#111214',
+  bgSecondary: '#0A0A0C',
 } as const;
 
 export const CONTACT_API_ENDPOINT = 'https://api.example.com/contact';

@@ -1,9 +1,11 @@
 interface BadgeProps {
   label: string;
-  variant?: 'coral' | 'amber' | 'sage' | 'gray';
+  variant?: 'primary' | 'secondary' | 'coral' | 'amber' | 'sage' | 'gray';
 }
 
 const variantStyles: Record<string, string> = {
+  primary: 'border-[var(--accent-primary)] text-[var(--accent-primary)]',
+  secondary: 'border-[var(--accent-secondary)] text-[var(--accent-secondary)]',
   coral: 'border-[var(--accent-coral)] text-[var(--accent-coral)]',
   amber: 'border-[var(--accent-amber)] text-[var(--accent-amber)]',
   sage: 'border-[var(--accent-sage)] text-[var(--accent-sage)]',
