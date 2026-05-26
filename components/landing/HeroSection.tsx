@@ -163,9 +163,7 @@ export default function HeroSection() {
         </p> */}
         {/* ── Hero Text Column (LEFT) ── */}
         <div className="hero-text-column">
-          <span className="hero-tag text-mono text-xs tracking-[0.2em]">
-            // ESTABLISHED 2018 — NIT PATNA
-          </span>
+
         {/* <p className="hero-tagline text-body max-w-lg text-lg">
           {SITE_CONFIG.tagline}. {SITE_CONFIG.description.slice(0, 120)}...
         </p> */}
