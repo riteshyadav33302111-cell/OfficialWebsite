@@ -4,6 +4,7 @@ import BentoGrid from '@/components/landing/BentoGrid';
 import GalleryPreview from '@/components/landing/GalleryPreview';
 import RecentEvents from '@/components/landing/RecentEvents';
 import TeamsOverview from '@/components/landing/TeamsOverview';
+import FaqSection from '@/components/landing/FaqSection';
 import ContactForm from '@/components/landing/ContactForm';
 
 export default function Home() {
@@ -20,6 +21,8 @@ export default function Home() {
       <RecentEvents />
       <hr className="section-divider" />
       <TeamsOverview />
+      <hr className="section-divider" />
+      <FaqSection />
       <hr className="section-divider" />
       <ContactForm />
     </main>
