@@ -719,33 +719,302 @@ a {
   100% { transform: translateY(-16px); }
 }
 
-/* ── Model Loader ── */
-.model-loader {
+/* ============================================================
+   Full-Screen HUD Loading Screen
+   ============================================================ */
+.hud-loading-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* ── Fade-out transition ── */
+.hud-loading-screen--fade-out {
+  animation: hudScreenFadeOut 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes hudScreenFadeOut {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.02);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.08);
+    pointer-events: none;
+  }
+}
+
+/* ── Scanlines overlay ── */
+.hud-scanlines {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(255, 165, 0, 0.008) 2px,
+    rgba(255, 165, 0, 0.008) 4px
+  );
+  pointer-events: none;
+  z-index: 2;
+  animation: hudScanlineFlicker 4s ease-in-out infinite;
+}
+
+@keyframes hudScanlineFlicker {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 0.8; }
+}
+
+/* ── Vignette overlay ── */
+.hud-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 30%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── Center HUD wrapper ── */
+.hud-center-wrapper {
+  position: relative;
+  z-index: 10;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.75rem;
+  gap: 1.5rem;
 }
 
-.model-loader__spinner {
-  width: 36px;
-  height: 36px;
-  border: 2px solid rgba(255, 255, 255, 0.08);
-  border-top-color: var(--accent-coral);
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
+/* ── Main SVG ── */
+.hud-main-svg {
+  width: clamp(260px, 40vw, 380px);
+  height: clamp(260px, 40vw, 380px);
+  filter: drop-shadow(0 0 30px rgba(255, 165, 0, 0.15));
 }
 
-@keyframes spin {
+/* ── Ring base ── */
+.hud-ring {
+  fill: none;
+  transform-origin: center;
+}
+
+/* Ring variants */
+.hud-ring--ticks {
+  stroke: rgba(255, 165, 0, 0.12);
+}
+
+.hud-ring--outer-ref {
+  stroke: rgba(255, 165, 0, 0.08);
+  animation: hudSpinCw 60s linear infinite;
+}
+
+.hud-ring--progress-track {
+  stroke: rgba(255, 165, 0, 0.07);
+}
+
+.hud-ring--progress {
+  stroke: #FFA500;
+  filter: drop-shadow(0 0 6px rgba(255, 165, 0, 0.5));
+}
+
+.hud-ring--seg-cw {
+  stroke: #FFA500;
+  opacity: 0.7;
+  animation: hudSpinCw 6s linear infinite;
+}
+
+.hud-ring--seg-ccw {
+  stroke: rgba(255, 165, 0, 0.4);
+  animation: hudSpinCcw 4.5s linear infinite;
+}
+
+.hud-ring--inner-cw {
+  stroke: #FFA500;
+  opacity: 0.5;
+  animation: hudSpinCw 3s linear infinite;
+}
+
+.hud-ring--inner-border {
+  stroke: rgba(255, 165, 0, 0.15);
+}
+
+.hud-ring--innermost {
+  stroke: rgba(255, 165, 0, 0.08);
+}
+
+/* ── Corner brackets ── */
+.hud-bracket {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.4);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+}
+
+/* ── Cardinal pointers ── */
+.hud-pointer {
+  fill: rgba(255, 255, 255, 0.6);
+  animation: hudPointerPulse 2s ease-in-out infinite;
+}
+
+@keyframes hudPointerPulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.9; }
+}
+
+/* ── Decorative dots and tick lines ── */
+.hud-dot {
+  fill: rgba(255, 165, 0, 0.5);
+}
+
+.hud-tick-line {
+  stroke: rgba(255, 165, 0, 0.2);
+  stroke-width: 1;
+}
+
+/* ── Data bar rects ── */
+.hud-data-bar {
+  fill: rgba(255, 165, 0, 0.2);
+  animation: hudDataBarPulse 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes hudDataBarPulse {
+  0% { fill: rgba(255, 165, 0, 0.1); }
+  100% { fill: rgba(255, 165, 0, 0.35); }
+}
+
+/* ── Percentage text ── */
+.hud-pct-text {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 2rem;
+  font-weight: 700;
+  fill: #FFA500;
+  text-anchor: middle;
+  dominant-baseline: central;
+  letter-spacing: -0.03em;
+  filter: drop-shadow(0 0 8px rgba(255, 165, 0, 0.4));
+}
+
+/* ── Status dots ── */
+.hud-status-dot {
+  fill: rgba(255, 165, 0, 0.1);
+  transition: fill 0.3s ease;
+}
+
+.hud-status-dot--active {
+  fill: rgba(255, 165, 0, 0.7);
+}
+
+/* ── Loading label ── */
+.hud-loading-label {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: clamp(0.85rem, 1.5vw, 1.1rem);
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+  text-shadow: 0 0 10px rgba(255, 165, 0, 0.3);
+  animation: hudLabelPulse 2s ease-in-out infinite;
+}
+
+@keyframes hudLabelPulse {
+  0%, 100% {
+    opacity: 0.5;
+    text-shadow: 0 0 6px rgba(255, 165, 0, 0.15);
+  }
+  50% {
+    opacity: 1;
+    text-shadow: 0 0 16px rgba(255, 165, 0, 0.4);
+  }
+}
+
+/* ── Bottom-left data readout ── */
+.hud-bottom-data {
+  position: absolute;
+  bottom: 2rem;
+  left: 2.5rem;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+/* ── Top-right data readout ── */
+.hud-top-data {
+  position: absolute;
+  top: 2rem;
+  right: 2.5rem;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.35rem;
+}
+
+.hud-data-line {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255, 165, 0, 0.4);
+}
+
+.hud-data-line--dim {
+  color: rgba(255, 165, 0, 0.2);
+}
+
+.hud-data-val {
+  color: rgba(255, 165, 0, 0.7);
+  margin-left: 0.5rem;
+}
+
+/* ── Spin keyframes (shared) ── */
+@keyframes hudSpinCw {
+  from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
 
-.model-loader__text {
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  letter-spacing: 0.1em;
-  color: var(--accent-coral);
-  text-transform: uppercase;
+@keyframes hudSpinCcw {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
+/* ── Mobile responsive ── */
+@media (max-width: 768px) {
+  .hud-main-svg {
+    width: 240px;
+    height: 240px;
+  }
+
+  .hud-bottom-data {
+    bottom: 1rem;
+    left: 1rem;
+  }
+
+  .hud-top-data {
+    top: 1rem;
+    right: 1rem;
+  }
+
+  .hud-pct-text {
+    font-size: 1.6rem;
+  }
+}
+
+/* ── Legacy model-loader kept for compat (hidden) ── */
+.model-loader {
+  display: none;
 }
 
 /* ── Mobile responsive ── */

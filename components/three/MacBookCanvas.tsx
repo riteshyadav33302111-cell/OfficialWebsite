@@ -1,21 +1,8 @@
 'use client';
 
-import { Suspense, useRef, useEffect, useState } from 'react';
+import { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { useProgress, Html } from '@react-three/drei';
 import MacBookModel from './MacBookModel';
-
-/* ─── Loading overlay shown while the GLB is downloading ─── */
-function ModelLoader() {
-  return (
-    <Html center>
-      <div className="model-loader">
-        <div className="model-loader__spinner" />
-        <p className="model-loader__text">Loading 3D...</p>
-      </div>
-    </Html>
-  );
-}
 
 /* ─── Canvas wrapper with cinematic lighting ─── */
 interface MacBookCanvasProps {
@@ -76,7 +63,7 @@ export default function MacBookCanvas({ scrollProgress, isMobile }: MacBookCanva
       />
 
       {/* ── 3D Model ── */}
-      <Suspense fallback={<ModelLoader />}>
+      <Suspense fallback={null}>
         <MacBookModel scrollProgress={scrollProgress} isMobile={isMobile} />
       </Suspense>
     </Canvas>
